@@ -1,0 +1,3 @@
+primaryColor = #A77133
+body
+    background-color: primaryColor

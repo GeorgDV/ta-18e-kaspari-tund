@@ -1,0 +1,8 @@
+git init - initalize a git repo
+git add - add file to commit
+(git add . - add all files)
+git log - commit logs and their dates
+git branch - show branches
+git checkout (branch) - moveto another branch
+git add --patch - allows to choose which files to commit easier
+git rebase (branch) -i - edit done commits

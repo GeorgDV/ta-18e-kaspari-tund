@@ -1,0 +1,40 @@
+body {
+    background-color: aquamarine
+}
+
+#p {
+    background-color: lightblue;
+    width: 500px;
+    height: 160px;
+    margin-top: 3em;
+    border: 1px solid black;
+    margin: 0 auto;
+    margin-top: 1em;
+}
+
+#el2 {
+    background-color: paleturquoise;
+    width: 120px;
+    height: 150px;
+}
+
+#heading {
+    background-color: burlywood;
+    width: 250px;
+    height: 40px;
+    border: 5px brown solid;
+    margin: 0 auto;
+    margin-top: 0.5em;
+}
+
+#img {
+    margin-left: 0.1em;
+    width: 294px;
+    height: 294px;
+}
+
+#img-wrapper {
+    border: 2px red solid;
+    background-color: lightseagreen;
+    margin-top: 1em;
+}

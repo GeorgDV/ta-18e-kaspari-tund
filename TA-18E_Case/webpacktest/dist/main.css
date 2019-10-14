@@ -1,0 +1,27 @@
+body {
+    background-color: aquamarine
+}
+
+#el1 {
+    background-color: lightblue;
+    width: 500px;
+    height: 160px;
+    margin-top: 3em;
+}
+
+#el3 {
+    background-color: burlywood;
+    width: 250px;
+    height: 50px;
+}
+
+#img {
+    margin-left: 0.1em;
+    width: 175px;
+    height: 175px;
+}
+
+#img-wrapper {
+    border: 2px red solid;
+    background-color: lightgoldenrodyellow;
+}
