@@ -4,8 +4,8 @@ body {
 
 #p {
     background-color: lightblue;
-    width: 500px;
-    height: 160px;
+    width: auto;
+    height: auto;
     margin-top: 3em;
     border: 1px solid black;
     margin: 0 auto;
@@ -20,8 +20,8 @@ body {
 
 #heading {
     background-color: burlywood;
-    width: 250px;
-    height: 40px;
+    width: auto;
+    height: auto;
     border: 5px brown solid;
     margin: 0 auto;
     margin-top: 0.5em;

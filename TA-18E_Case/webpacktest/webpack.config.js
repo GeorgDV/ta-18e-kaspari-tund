@@ -53,6 +53,14 @@ module.exports = {
         {
           test: /\.html$/,
           use: ['raw-loader']
+        },
+        { 
+          test: /\.tsx?$/,
+          loader: "ts-loader"
+        },
+        {
+          test: /\.coffee$/,
+          use: [ 'coffee-loader' ]
         }
     ]
 
