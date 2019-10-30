@@ -4,6 +4,7 @@ const chalk = require('chalk');
 const boxen = require('boxen');
 const yargs = require('yargs');
 
+/*
 const arguments = yargs
                   .usage("Usage: -n <name>")
                   .option("n", {
@@ -14,6 +15,7 @@ const arguments = yargs
                     }).argv;
 
 if (!arguments.name) arguments.name = "Anoymous";
+*/
 
 let greeting = chalk.blue.bold(`HEllooOOO ${arguments.name} I've been expecting you..`);
 let options = {
