@@ -2,10 +2,15 @@ require("./index.html");
 import Vue from 'vue';
 
 import Box from "./Box.vue";
+import Modal from "./Modal.vue";
+
+Vue.component("box", Box);
+Vue.component("modal", Modal);
 
 let app = new Vue({
     el: '#app',
     data: {
+        text: "Some data stuff"
         /* DONELIST STUFF
         message: "Hello Vue",
         errorMessage: "",
@@ -37,6 +42,9 @@ let app = new Vue({
         */
     },
     computed: {
+        reversedText(){
+            return this.split(' ').reverse().join(' ');
+        }
         /* DONELIST STUFF
         doneList(){
             return this.list.filter(el => el.isDone);

@@ -12,7 +12,8 @@
         props: ["message"],
         data() {
             return {
-                message: "Hello Data Component.."
+                message: "Hello Data Component..",
+                isOpen: false
             }
         }
     }
