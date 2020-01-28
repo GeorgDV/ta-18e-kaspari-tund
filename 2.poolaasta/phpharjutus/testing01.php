@@ -30,13 +30,20 @@ class Cat{
      */
 
     private string $name;
+    public static $count = 0;
 
     public function __construct(string $name){
         $this->name = $name;
+        self::$count++;
     }
 
     public function meow(){
         echo ("\nKass teeb - Mjäu.\n\n");
+    }
+
+    public function pet(){
+        //add happiness to cat
+        return $this;
     }
 
 }
@@ -45,4 +52,15 @@ class Cat{
 $sips = new Cat("Sips");
 $sips ->age = 2; /*SET NEW PROPERTY DYNAMICALLY*/
 $sips ->meow(); /*CALL FUNCTION FROM CAT OBJECT*/
-var_dump($sips);
+var_dump($sips);/*DECONSTRUCT OBJECT*/ 
+var_dump($sips::$count);/*DECONSTURCT COUNT INTEGER - count = 1*/
+
+$nuustik = new Cat("Nuustik");
+$nuustik ->age = 4;
+$nuustik ->meow();
+var_dump($nuustik::$count);
+var_dump(Cat::$count); /*count = 2*/ 
+
+Cat::meow();
+
+//$sips::pet()->pet()->pet();
