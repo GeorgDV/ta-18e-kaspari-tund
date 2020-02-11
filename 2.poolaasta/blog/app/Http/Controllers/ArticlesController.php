@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class ArticlesController extends Controller
 {
     public function index() {
-        dd("Hello");
+
     }
 }
