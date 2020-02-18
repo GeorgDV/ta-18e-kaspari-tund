@@ -11,6 +11,7 @@
 |
 */
 
-use App\Http\Controllers\ArticlesController;
+use App\Http\Controllers\ArticleController;
 
-Route::get('/', [ArticlesController::class, 'index']);
+Route::get('/', [ArticleController::class, 'index']);
+
