@@ -1,11 +1,5 @@
 <template>
-    <div>
-      <button class="button">1</button>
-      <button class="button">2</button>
-      <button class="button">3</button>
-      <button class="button">4</button>
-      <button class="button">5</button>
-    </div>
+  <button class="button">1</button>
 </template>
 
 <script>
@@ -16,7 +10,18 @@
           pages() {
 
           }
+        },
+      mounted(){
+        this.$axios.$get('http://127.0.0.1:8000/api/articles').then(response => {
+          this.articles = response.data;
+          this.currentPage = 0;
+        })
+      },
+      data(){
+        return {
+          articles: []
         }
+      },
     }
 </script>
 

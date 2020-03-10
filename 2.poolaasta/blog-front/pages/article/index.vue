@@ -30,6 +30,7 @@
 
 <script>
     import Pagination from "../../components/pagination";
+    import {empty} from "../../.nuxt/utils";
     export default {
         name: "index",
       components: {Pagination},
@@ -50,18 +51,22 @@
       methods: {
         next(){
           this.$axios.$get(this.pagination.next_page_url).then(response => {
-            this.articles = response.data;
-            delete(response.data);
-            this.pagination = response;
-            console.log(this.pagination);
+            if (response.data != null) {
+              this.articles = response.data;
+              delete(response.data);
+              this.pagination = response;
+              console.log(this.pagination);
+            }
           })
         },
         back(){
           this.$axios.$get(this.pagination.prev_page_url).then(response => {
-            this.articles = response.data;
-            delete(response.data);
-            this.pagination = response;
-            console.log(this.pagination);
+            if (response.data != null) {
+              this.articles = response.data;
+              delete(response.data);
+              this.pagination = response;
+              console.log(this.pagination);
+            }
           })
         }
       }
