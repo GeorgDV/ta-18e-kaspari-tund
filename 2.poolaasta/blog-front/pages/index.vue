@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <nuxt-link class="button is-primary" to="/article/">Link to Articles</nuxt-link>
     <button class="button" @click="next">Next</button>
     <card v-for="article in articles" :content="article.exerpt"></card>
   </div>
