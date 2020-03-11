@@ -1,5 +1,9 @@
 <template>
-  <button class="button">1</button>
+  <div>
+    <div v-for="page in getPages">
+      <button class="button" style="float: left;">{{page}}</button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -7,8 +11,23 @@
         name: "pagination",
         props: ["pagination"],
         computed: {
-          pages() {
+          getPages() {
+            let pagesArray = [];
 
+            if (this.articles.length > 10) {
+              let counter = 0;
+              let pageCounter = 1;
+              for (let articlesCount = 0 ; articlesCount < this.articles.length; articlesCount++) {
+                if ((articlesCount - 9) == counter) {
+                  pagesArray.push(pageCounter);
+                  pageCounter++;
+                  counter += 10;
+                }
+              }
+              pageCounter++;
+            }
+
+            return pagesArray;
           }
         },
       mounted(){
