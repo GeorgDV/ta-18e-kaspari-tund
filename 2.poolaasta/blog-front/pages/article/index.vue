@@ -39,7 +39,7 @@
           this.articles = response.data;
           delete(response.data);
           this.pagination = response;
-          console.log(this.pagination);
+          //console.log(this.pagination);
         })
       },
       data(){
@@ -55,7 +55,7 @@
               this.articles = response.data;
               delete(response.data);
               this.pagination = response;
-              console.log(this.pagination);
+              //console.log(this.pagination);
             }
           })
         },
