@@ -1,19 +1,19 @@
 <template>
   <div>
-    <div v-if="pagesArray.length < 9" v-for="page in pagesArray">
-      <button class="button" style="float: left;" @click="getPage">{{page}}</button>
+    <div v-if="pagesArray.length < 9" v-for="page in getPages">
+      <button class="button" style="float: left;" @click="$emit('get-page', $event)">{{page}}</button>
     </div>
     <div v-if="pagesArray.length > 9">
       <div v-for="page in getFirstPages">
-        <button class="button" style="float: left;" @click="getPage">{{page}}</button>
+        <button class="button" style="float: left;" @click="$emit('get-page', $event)">{{page}}</button>
       </div>
       <div style="float: left;">...</div>
       <div v-for="page in getMiddlePages">
-        <button class="button" style="float: left;" @click="getPage">{{page}}</button>
+        <button class="button" style="float: left;" @click="$emit('get-page', $event)">{{page}}</button>
       </div>
       <div style="float: left;">...</div>
       <div v-for="page in getLastPages">
-        <button class="button" style="float: left;" @click="getPage">{{page}}</button>
+        <button class="button" style="float: left;" @click="$emit('get-page', $event)">{{page}}</button>
       </div>
     </div>
   </div>
@@ -23,66 +23,59 @@
     export default {
         name: "pagination",
         props: {
-          articlesProp: [],
-          paginationProp: {}
+          pagination: {}
         },
         computed: {
-          getFirstPages() {
+          getPages() {
             if (this.pagination.current_page != null) {
               this.pagesArray = [];
               for (let page = 1; page <= this.pagination.last_page; page++) {
                 this.pagesArray.push(page);
               }
+            }
+            return this.pagesArray;
+          },
 
+          getFirstPages() {
               //GET FIRST PAGES
               this.firstPages = [];
               for (let page = 1; page <= 3; page++) {
                 this.firstPages.push(page);
               }
-            }
+
             return this.firstPages;
           },
 
           getMiddlePages() {
-            if (this.pagination.current_page != null) {
-              this.pagesArray = [];
-              for (let page = 1; page <= this.pagination.last_page; page++) {
-                this.pagesArray.push(page);
-              }
-
               //GET MIDDLE PAGES - 2 OUTCOMES - EITHER GET +-2 pages VIA CURRENTLY SELECTED PAGE, OR JUST GET +-2 pages VIA MIDDLE PAGE
               this.middlePages = [];
               this.currentPage = this.pagination.current_page;
+              console.log("Current page:");
+              console.log(this.currentPage);
               //OPTION 1
               for (let page = this.currentPage - 2; page <= this.currentPage + 2; page++) {
-                if (page > 3 && page < this.pagination.last_page - 3) {
+                if (page > 3 && page < this.pagination.last_page - 2) {
                   this.middlePages.push(page);
                 }
               }
 
-              //OPTION 2
+              //OPTION 2 (if no middlepages were added)
               if (this.middlePages.length == 0) {
                 for (let page = Math.round(this.pagesArray.length / 2) - 2; page <= Math.round(this.pagesArray.length / 2) + 2; page++) {
                   this.middlePages.push(page);
                 }
               }
-            }
+
             return this.middlePages;
           },
 
           getLastPages() {
-            if (this.pagination.current_page != null) {
-              this.pagesArray = [];
-              for (let page = 1; page <= this.pagination.last_page; page++) {
-                this.pagesArray.push(page);
-              }
-
               //GET LAST PAGES
               this.lastPages = [];
               for (let page = this.pagesArray.length - 2; page <= this.pagesArray.length; page++) {
                 this.lastPages.push(page);
               }
-            }
+
             return this.lastPages;
           }
 
@@ -102,27 +95,7 @@
           this.articles = response.data;
           delete(response.data);
           this.pagination = response;
-
-
-          if (this.pagination.current_page != null) {
-            for (let page = 1; page <= this.pagination.last_page; page++) {
-              this.pagesArray.push(page);
-            }
-          }
         })
-      },
-      methods: {
-        getPage(event) {
-          this.$axios.$get('http://127.0.0.1:8000/api/articles?page=' + event.target.innerHTML).then(response => {
-            if (response.data != null) {
-              this.articles = response.data;
-              delete(response.data);
-              this.pagination = response;
-              console.log("These are the articles that should be shown..:");
-              console.log(this.articles);
-            }
-          })
-        }
       }
     }
 </script>

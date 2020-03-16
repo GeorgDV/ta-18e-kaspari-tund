@@ -24,7 +24,7 @@
     </tr>
     </tbody>
   </table>
-  <pagination></pagination>
+  <pagination v-bind:pagination="this.pagination" @get-page="getPage"></pagination>
 </div>
 </template>
 
@@ -62,6 +62,17 @@
               this.articles = response.data;
               delete(response.data);
               this.pagination = response;
+            }
+          })
+        },
+        getPage(event) {
+          this.$axios.$get('http://127.0.0.1:8000/api/articles?page=' + event.target.innerHTML).then(response => {
+            if (response.data != null) {
+              this.articles = response.data;
+              delete(response.data);
+              this.pagination = response;
+              console.log("These are the articles that should be shown..:");
+              console.log(this.articles);
             }
           })
         }
