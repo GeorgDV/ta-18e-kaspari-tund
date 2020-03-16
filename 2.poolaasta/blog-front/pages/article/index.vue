@@ -30,7 +30,6 @@
 
 <script>
     import Pagination from "../../components/pagination";
-    import {empty} from "../../.nuxt/utils";
     export default {
         name: "index",
       components: {Pagination},
@@ -39,7 +38,6 @@
           this.articles = response.data;
           delete(response.data);
           this.pagination = response;
-          //console.log(this.pagination);
         })
       },
       data(){
@@ -55,7 +53,6 @@
               this.articles = response.data;
               delete(response.data);
               this.pagination = response;
-              //console.log(this.pagination);
             }
           })
         },
@@ -65,7 +62,6 @@
               this.articles = response.data;
               delete(response.data);
               this.pagination = response;
-              console.log(this.pagination);
             }
           })
         }
