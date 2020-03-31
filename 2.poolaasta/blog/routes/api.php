@@ -17,5 +17,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/articles', [\App\Http\Controllers\ArticleController::class, 'index']);
-Route::put('/articles', [\App\Http\Controllers\ArticleController::class, 'store']);
+Route::apiResources(['articles'=>'ArticleController']);
+
+//Route::get('/articles', [\App\Http\Controllers\ArticleController::class, 'index']);
+//Route::put('/articles', [\App\Http\Controllers\ArticleController::class, 'store']);
+//Route::get('/articles/{article}', [\App\Http\Controllers\ArticleController::class, 'show']);
+//Route::patch('/articles/{article}', [\App\Http\Controllers\ArticleController::class, 'update']);
+//Route::delete('/articles/{article}', [\App\Http\Controllers\ArticleController::class, 'destroy']);
+
+
+
