@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Http\Requests\CreateArticleRequest;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -24,12 +25,12 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateArticleRequest $request)
     {
-        $article = new Article();
-        $article->title = $request->input("title");
-        $article->body = $request->input("body");
-        //$article->exerpt = $request->input("body");
+        $validated = $request->validated();
+        $article = new Article($validated);
+        //$article->title = $validated["title"];
+        //$article->body = $validated["body"];
         $article->save();
         return $article;
     }

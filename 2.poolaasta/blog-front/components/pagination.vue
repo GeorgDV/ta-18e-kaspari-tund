@@ -1,19 +1,19 @@
 <template>
   <div>
     <div v-if="pagesArray.length < 9" v-for="page in getPages">
-      <button class="button" style="float: left;" @click="$emit('get-page', $event)">{{page}}</button>
+      <button class="button" style="float: left;" @click="$emit('get-page', page)">{{page}}</button>
     </div>
     <div v-if="pagesArray.length > 9">
       <div v-for="page in getFirstPages">
-        <button class="button" style="float: left;" @click="$emit('get-page', $event)">{{page}}</button>
+        <button class="button" style="float: left;" @click="$emit('get-page', page)">{{page}}</button>
       </div>
       <div style="float: left;">...</div>
       <div v-for="page in getMiddlePages">
-        <button class="button" style="float: left;" @click="$emit('get-page', $event)">{{page}}</button>
+        <button class="button" style="float: left;" @click="$emit('get-page', page)">{{page}}</button>
       </div>
       <div style="float: left;">...</div>
       <div v-for="page in getLastPages">
-        <button class="button" style="float: left;" @click="$emit('get-page', $event)">{{page}}</button>
+        <button class="button" style="float: left;" @click="$emit('get-page', page)">{{page}}</button>
       </div>
     </div>
   </div>
