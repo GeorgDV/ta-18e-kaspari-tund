@@ -19,8 +19,6 @@
         name: "Search",
         data() {
           return {
-            search: '',
-            sort: null,
             stats: ['Confirmed', 'Deaths', 'Recovered']
           }
         },
@@ -32,6 +30,26 @@
           }
         },
         computed: {
+          search: {
+            get(){
+              return this.$store.state.filters.search;
+            },
+
+            set(value){
+              this.$store.commit('SET_SEARCH_FILTER', value);
+            }
+          },
+
+          sort: {
+            get(){
+              return this.$store.state.filters.sort;
+            },
+
+            set(value){
+              this.$store.commit('SET_SORT_FILTER', value);
+            }
+          },
+
           totalStats(){
             return this.stats.map(stat => 'Total' + stat);
           },
