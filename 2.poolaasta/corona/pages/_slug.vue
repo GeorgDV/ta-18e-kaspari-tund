@@ -1,6 +1,7 @@
 <template>
   <div class="section">
-    <chart :labels="$store.getters.confirmedTimelineLabels" :data="$store.getters.confirmedTimelineData" v-if="$store.state.timeline.confirmed != []"></chart>
+    <chart :labels="$store.getters.timelineLabels" :confirmed="$store.getters.timelineConfirmed"
+           :deaths="$store.getters.timelineDeaths" :recovered="$store.getters.timelineRecovered"></chart>
   </div>
 </template>
 
@@ -9,7 +10,9 @@
   export default {
     components: {Chart},
     created() {
-      this.$store.dispatch('fetchConfirmedTimeline', this.$route.params.slug)
+      this.$store.dispatch('fetchConfirmedTimeline', this.$route.params.slug);
+      this.$store.dispatch('fetchDeathsTimeline', this.$route.params.slug);
+      this.$store.dispatch('fetchRecoveredTimeline', this.$route.params.slug);
     },
   }
 </script>

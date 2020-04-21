@@ -6,7 +6,9 @@ export const state = () => ({
    sort: ''
   },
   timeline: {
-    confirmed: []
+    confirmed: [],
+    deaths: [],
+    recovered: []
   }
 });
 
@@ -29,6 +31,14 @@ export const mutations = {
 
   SET_CONFIRMED_TIMELINE(state, payload){
     state.timeline.confirmed = payload;
+  },
+
+  SET_DEATHS_TIMELINE(state, payload){
+    state.timeline.deaths = payload;
+  },
+
+  SET_RECOVERED_TIMELINE(state, payload){
+    state.timeline.recovered = payload;
   }
 };
 
@@ -44,16 +54,36 @@ export const actions = {
     this.$axios.$get(`https://api.covid19api.com/dayone/country/${slug}/status/confirmed/live`).then(response =>{
       commit('SET_CONFIRMED_TIMELINE', response);
     });
+  },
+
+  fetchDeathsTimeline({commit}, slug){
+    this.$axios.$get(`https://api.covid19api.com/dayone/country/${slug}/status/deaths/live`).then(response =>{
+      commit('SET_DEATHS_TIMELINE', response);
+    });
+  },
+
+  fetchRecoveredTimeline({commit}, slug){
+    this.$axios.$get(`https://api.covid19api.com/dayone/country/${slug}/status/recovered/live`).then(response =>{
+      commit('SET_RECOVERED_TIMELINE', response);
+    });
   }
 };
 
 export const getters = {
-  confirmedTimelineLabels(state){
+  timelineLabels(state){
     return state.timeline.confirmed.map(data => data.Date);
   },
 
-  confirmedTimelineData(state){
+  timelineConfirmed(state){
     return state.timeline.confirmed.map(data => data.Cases);
+  },
+
+  timelineDeaths(state){
+    return state.timeline.deaths.map(data => data.Cases);
+  },
+
+  timelineRecovered(state){
+    return state.timeline.recovered.map(data => data.Cases);
   },
 
   globalAsCountry(state){
