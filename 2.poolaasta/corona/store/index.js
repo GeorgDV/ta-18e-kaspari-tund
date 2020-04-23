@@ -29,6 +29,7 @@ export const mutations = {
     state.filters.sort = payload;
   },
 
+  //HOMEWORK PART 1 --------------------------------------
   SET_CONFIRMED_TIMELINE(state, payload){
     state.timeline.confirmed = payload;
   },
@@ -40,6 +41,7 @@ export const mutations = {
   SET_RECOVERED_TIMELINE(state, payload){
     state.timeline.recovered = payload;
   }
+  //HOMEWORK PART 1 --------------------------------------
 };
 
 export const actions = {
@@ -50,6 +52,7 @@ export const actions = {
     });
   },
 
+  //HOMEWORK PART 2 --------------------------------------
   fetchConfirmedTimeline({commit}, slug){
     this.$axios.$get(`https://api.covid19api.com/dayone/country/${slug}/status/confirmed/live`).then(response =>{
       commit('SET_CONFIRMED_TIMELINE', response);
@@ -67,6 +70,7 @@ export const actions = {
       commit('SET_RECOVERED_TIMELINE', response);
     });
   }
+  //HOMEWORK PART 2 --------------------------------------
 };
 
 export const getters = {
@@ -74,6 +78,7 @@ export const getters = {
     return state.timeline.confirmed.map(data => data.Date);
   },
 
+  //HOMEWORK PART 3 --------------------------------------
   timelineConfirmed(state){
     return state.timeline.confirmed.map(data => data.Cases);
   },
@@ -85,6 +90,7 @@ export const getters = {
   timelineRecovered(state){
     return state.timeline.recovered.map(data => data.Cases);
   },
+  //HOMEWORK PART 3 --------------------------------------
 
   globalAsCountry(state){
     return {Country:'World', Slug: 'world', ...state.global};

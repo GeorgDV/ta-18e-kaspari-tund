@@ -11,6 +11,7 @@
   export default {
     components: {Chart},
     created() {
+      //MORE HOMEWORK
       this.$store.dispatch('fetchConfirmedTimeline', this.$route.params.slug);
       this.$store.dispatch('fetchDeathsTimeline', this.$route.params.slug);
       this.$store.dispatch('fetchRecoveredTimeline', this.$route.params.slug);

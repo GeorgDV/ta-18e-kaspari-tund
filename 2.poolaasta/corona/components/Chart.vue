@@ -18,6 +18,7 @@
           labels: this.labels,
           datasets: [{
             label: 'Number of Confirmed Cases',
+            //MORE HOMEWORK TO ADD FANCY COLORED GRAPH
             backgroundColor: "rgba(179,164,220,0.4)",
             borderColor: "rgba(38,0,76,0.8)",
             data: this.confirmed,
