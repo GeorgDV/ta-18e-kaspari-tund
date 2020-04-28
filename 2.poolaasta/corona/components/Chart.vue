@@ -1,41 +1,46 @@
 <template>
-  <canvas ref="myChart"></canvas>
+  <div>
+    <canvas ref="myChart"></canvas>
+    <slot></slot>
+  </div>
 </template>
 
 <script>
   import Chart from "chart.js";
   export default {
     name: "Chart",
-    props: ['labels', 'confirmed', 'deaths', 'recovered'],
+    props: ['labels', 'data'],
     data() {
       return {
+        chart: null
+      }
+    },
+    updated() {
+      this.chart.data.datasets = this.$children.map(dataset => {
+        return  {
+          label: dataset.title,
+          data: dataset.data,
+          borderColor: dataset.borderColor,
+          backgroundColor: dataset.backgroundColor
+        }
+      });
+      this.chart.update();
+    },
+    watch: {
+      labels(labels, oldLabels){
+        this.chart.data.labels = labels;
+        this.chart.update();
+      },
+      data(data, oldData){
+        this.chart.data.datasets[0].data = data;
+        this.chart.update();
       }
     },
     mounted() {
-      var myChart = new Chart(this.$refs['myChart'], {
+      this.chart = new Chart(this.$refs['myChart'],{
         type: 'line',
         data: {
-          labels: this.labels,
-          datasets: [{
-            label: 'Number of Confirmed Cases',
-            //MORE HOMEWORK TO ADD FANCY COLORED GRAPH
-            backgroundColor: "rgba(179,164,220,0.4)",
-            borderColor: "rgba(38,0,76,0.8)",
-            data: this.confirmed,
-            borderWidth: 2
-          }, {
-            label: 'Number of Death Cases',
-            backgroundColor: "rgba(255,124,148,0.4)",
-            borderColor: "rgba(168,0,23,0.8)",
-            data: this.deaths,
-            borderWidth: 2
-          }, {
-            label: 'Number of Recovered Cases',
-            backgroundColor: "rgba(0,192,9,0.4)",
-            borderColor: "rgba(76,168,87,0.8)",
-            data: this.recovered,
-            borderWidth: 2
-          },]
+          labels: this.labels
         },
         options: {
           scales: {

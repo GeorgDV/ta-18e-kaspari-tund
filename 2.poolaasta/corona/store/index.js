@@ -52,7 +52,14 @@ export const actions = {
     });
   },
 
+  fetchTimeline({commit}, {slug, type}){
+    this.$axios.$get(`https://api.covid19api.com/dayone/country/${slug}/status/${type}/live`).then(response =>{
+      commit('SET_' + type.toUpperCase() + '_TIMELINE', response);
+    });
+  },
+
   //HOMEWORK PART 2 --------------------------------------
+  /*
   fetchConfirmedTimeline({commit}, slug){
     this.$axios.$get(`https://api.covid19api.com/dayone/country/${slug}/status/confirmed/live`).then(response =>{
       commit('SET_CONFIRMED_TIMELINE', response);
@@ -70,6 +77,7 @@ export const actions = {
       commit('SET_RECOVERED_TIMELINE', response);
     });
   }
+  */
   //HOMEWORK PART 2 --------------------------------------
 };
 
@@ -78,7 +86,16 @@ export const getters = {
     return state.timeline.confirmed.map(data => data.Date);
   },
 
+  timelineData(state) {
+    return {
+      confirmed: state.timeline.confirmed.map(data => data.Cases),
+      deaths: state.timeline.deaths.map(data => data.Cases),
+      recovered: state.timeline.recovered.map(data => data.Cases)
+    };
+  },
+
   //HOMEWORK PART 3 --------------------------------------
+  /*
   timelineConfirmed(state){
     return state.timeline.confirmed.map(data => data.Cases);
   },
@@ -90,6 +107,7 @@ export const getters = {
   timelineRecovered(state){
     return state.timeline.recovered.map(data => data.Cases);
   },
+  */
   //HOMEWORK PART 3 --------------------------------------
 
   globalAsCountry(state){
