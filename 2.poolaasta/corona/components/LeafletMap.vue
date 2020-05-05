@@ -17,7 +17,7 @@
           this.map.setZoom(newZoom);
         },
         geoJSON(newGeoJSON){
-          L.geoJSON(newGeoJSON).addTo(this.map);
+          L.geoJSON(newGeoJSON, {style: this.style}).addTo(this.map);
         }
       },
       mounted() {
@@ -36,6 +36,29 @@
           return {
             map: null
           }
+      },
+      methods: {
+        getColor(d){
+          return d > 10000 ? '#0f2380' :
+            d > 5000  ? '#0739bd' :
+              d > 2000  ? '#1742e3' :
+                d > 1000  ? '#2f6afc' :
+                  d > 500   ? '#3985fd' :
+                    d > 200   ? '#6496fe' :
+                      d > 100   ? '#8ba9fe' :
+                        d > 10   ? '#b9c5f9':
+                           '#f1f6ff';
+        },
+        style(feature){
+          return {
+            fillColor: this.getColor(feature.properties.cases),
+            weight: 2,
+            opacity: 1,
+            color: 'white',
+            dashArray: '3',
+            fillOpacity: 0.7
+          };
+        }
       }
     }
 </script>

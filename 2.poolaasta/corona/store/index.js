@@ -14,6 +14,7 @@ export const state = () => ({
   },
   map: {
     geoJSON: {
+      features: []
     }
   }
 });
@@ -155,7 +156,7 @@ export const getters = {
   confirmedGeoJSON(state){
     let geoJSON = JSON.parse(JSON.stringify(state.map.geoJSON));
     state.countries.forEach(country => {
-      geoJSON.features.map(feature => {
+      geoJSON.features = geoJSON.features.map(feature => {
         if (feature.properties.name.toLowerCase() === country.Country.toLowerCase()){
           feature.properties.cases = country.TotalConfirmed;
         }
