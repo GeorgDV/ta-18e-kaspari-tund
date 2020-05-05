@@ -13,7 +13,6 @@ class CoronaController extends Controller
         $key = $url.\GuzzleHttp\json_encode(request()->query->all());
 
         if (!Cache::has($key)){
-            dump('live');
             $client = new Client(['verify' => false]);
             $resp = $client->get('https://api.covid19api.com/' . $url)->getBody()->getContents();
             Cache::put($key, $resp, 3600);

@@ -57,14 +57,14 @@ export const mutations = {
 
 export const actions = {
   fetchStatistics(context){
-    this.$axios.$get('https://api.covid19api.com/summary').then(response =>{
+    this.$axios.$get('http://localhost:8000/api/corona/summary').then(response =>{
       context.commit('SET_COUNTRIES', response.Countries);
       context.commit('SET_GLOBAL', response.Global);
     });
   },
 
   fetchTimeline({commit}, {slug, type}){
-    this.$axios.$get(`https://api.covid19api.com/dayone/country/${slug}/status/${type}/live`).then(response =>{
+    this.$axios.$get(`http://localhost:8000/api/corona/dayone/country/${slug}/status/${type}/live`).then(response =>{
       commit('SET_' + type.toUpperCase() + '_TIMELINE', response);
     });
   },
