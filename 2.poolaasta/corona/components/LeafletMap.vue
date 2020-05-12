@@ -12,7 +12,6 @@
       watch: {
         active(newActive){
           this.active = newActive;
-          L.geoJSON(this.newGeoJSON, {style: this.style}).addTo(this.map);
         },
         center(newCenter){
           this.map.flyTo(newCenter);
@@ -21,9 +20,7 @@
           this.map.setZoom(newZoom);
         },
         geoJSON(newGeoJSON){
-          this.newGeoJSON = newGeoJSON;
           L.geoJSON(newGeoJSON, {style: this.style}).addTo(this.map);
-          console.log(this.active);
         }
       },
       mounted() {
@@ -41,12 +38,11 @@
       data(){
           return {
             map: null,
-            active: null,
-            newGeoJSON: null
+            active: null
           }
       },
       methods: {
-        getConfirmedColor(d){
+        getColor(d){
           return d > 10000 ? '#0f2380' :
             d > 5000  ? '#0739bd' :
               d > 2000  ? '#1742e3' :
@@ -57,37 +53,22 @@
                         d > 10   ? '#b9c5f9':
                           '#f1f6ff';
         },
-        getDeathsColor(d){
-          return d > 10000 ? '#80000a' :
-            d > 5000  ? '#bd0014' :
-              d > 2000  ? '#e31700' :
-                d > 1000  ? '#fc2d0f' :
-                  d > 500   ? '#fd2938' :
-                    d > 200   ? '#fe5257' :
-                      d > 100   ? '#fe7e88' :
-                        d > 10   ? '#f9b6bc':
-                          '#ffeef3';
-        },
         style(feature){
+          var color = "";
           if (this.active === 'confirmed'){
-            return {
-              fillColor: this.getConfirmedColor(feature.properties.confirmed),
-              weight: 2,
-              opacity: 1,
-              color: 'white',
-              dashArray: '3',
-              fillOpacity: 0.7
-            };
+            color = this.getColor(feature.properties.confirmed);
           } else if (this.active === 'deaths'){
-            return {
-              fillColor: this.getDeathsColor(feature.properties.deaths),
-              weight: 2,
-              opacity: 1,
-              color: 'red',
-              dashArray: '3',
-              fillOpacity: 0.7
-            };
+            color = this.getColor(feature.properties.deaths);
           }
+
+          return {
+            fillColor: color,
+            weight: 2,
+            opacity: 1,
+            color: 'white',
+            dashArray: '3',
+            fillOpacity: 0.7
+          };
 
         }
       }

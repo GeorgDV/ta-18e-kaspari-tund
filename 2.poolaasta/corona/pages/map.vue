@@ -1,10 +1,12 @@
 <template>
   <div>
     <leaflet-map :center="[45, 45]" :zoom="4" :geoJSON="this.$store.getters.confirmedGeoJSON" :active="getActive"></leaflet-map>
+
     <div id="button-wrapper">
       <h3>Currently Showing {{this.active.toUpperCase()}}</h3>
-      <button class="button button-action is-danger" @click="toggleActive">Toggle Confirmed/Deaths</button>
+      <button class="button is-info" @click="toggleActive">Toggle Confirmed/Deaths</button>
     </div>
+
   </div>
 </template>
 
@@ -28,6 +30,7 @@
           } else if (this.active === 'confirmed') {
             this.active = 'deaths';
           }
+          this.$store.dispatch('fetchGeoJSON');
         }
       },
       computed: {
@@ -42,7 +45,7 @@
   #button-wrapper {
     position: absolute;
     width: 100%;
-    padding: 1em;
+    padding: 0.2em;
     text-align: center;
   }
 </style>
