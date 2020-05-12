@@ -70,7 +70,7 @@ export const actions = {
   },
 
   fetchGeoJSON({commit}){
-    this.$axios.$get("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json").then(response => {
+    this.$axios.$get("http://localhost:8000/api/geojson").then(response => {
       commit('SET_MAP_GEOJSON', response);
     });
   }
@@ -154,15 +154,6 @@ export const getters = {
   },
 
   confirmedGeoJSON(state){
-    let geoJSON = JSON.parse(JSON.stringify(state.map.geoJSON));
-    state.countries.forEach(country => {
-      geoJSON.features = geoJSON.features.map(feature => {
-        if (feature.properties.name.toLowerCase() === country.Country.toLowerCase()){
-          feature.properties.cases = country.TotalConfirmed;
-        }
-        return feature;
-      });
-    });
-    return geoJSON;
+    return state.map.geoJSON;
   }
 };
